@@ -6,7 +6,7 @@
 </head>
 <body>
 <a th:href="@{/catalogue/products/list}">&larr; К списку товара</a>
-<h1 th:text="${product.getTitle()}"></h1>
+<h1 th:text="${product.title()}"></h1>
 <ul>
     <li><string>ID</string>: <span th:text="${product.id}"></span></li>
     <li><string>Title</string>: <span th:text="${product.title}"></span></li>

@@ -1,7 +1,6 @@
-package ag.selmag.manager.repository;
+package ag.selmag.catalogue.repository;
 
-import ag.selmag.manager.entity.Product;
-import org.springframework.stereotype.Repository;
+import ag.selmag.catalogue.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,0 +1,3 @@
+selmag:
+  services:
+    uri: http://localhost:8081
