@@ -24,10 +24,10 @@ public class RestClientProductsRestClientImpl implements ProductsRestClient {
           new ParameterizedTypeReference<>(){};
 
   @Override
-  public List<Product> findAllProducts() {
+  public List<Product> findAllProducts(String filter) {
     return this.restClient
             .get()
-            .uri("/catalogue-api/products")
+            .uri("/catalogue-api/products?filter={filter}",filter)
             .retrieve()
             .body(PRODUCTS_TYPE_REFERENCE);
   }

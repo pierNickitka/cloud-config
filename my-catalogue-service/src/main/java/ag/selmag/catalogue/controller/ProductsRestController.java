@@ -28,8 +28,9 @@ public class ProductsRestController {
   private final MessageSource messageSource;
 
   @GetMapping
-  public List<Product> findProducts(){
-    return this.productService.findAllProducts();
+  public Iterable<Product> findProducts(@RequestParam(name = "filter" ,required = false) String filter){
+
+    return this.productService.findAllProducts("%"+filter+"%");
   }
 
   @PostMapping()
