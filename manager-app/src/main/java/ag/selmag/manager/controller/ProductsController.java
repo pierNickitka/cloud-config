@@ -5,11 +5,14 @@ import ag.selmag.manager.controller.client.ProductsRestClient;
 import ag.selmag.manager.controller.payload.NewProductPayload;
 import ag.selmag.manager.entity.Product;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RequiredArgsConstructor
 @Controller
@@ -18,7 +21,9 @@ public class ProductsController {
   private final ProductsRestClient productsRestClient;
 
   @GetMapping("list")
-  public String getProductsList(Model model, @RequestParam(name = "filter", required = false) String filter) {
+  public String getProductsList(Model model, @RequestParam(name = "filter", required = false) String filter,Principal principal) {
+    LoggerFactory.getLogger(ProductsController.class)
+                    .info("principal {}",principal );
     model.addAttribute("products", productsRestClient.findAllProducts(filter));
     model.addAttribute("filter", filter);
     return "catalogue/products/list";
