@@ -53,10 +53,10 @@ public class RestClientProductsRestClientImpl implements ProductsRestClient {
   public Optional<Product> findProduct(int productId) {
     try {
       return Optional.ofNullable(this.restClient.get()
-              .uri("/catalogue-api/products/{productId}", Map.of("productId", productId))
+              .uri("/catalogue-api/products/{productId}", productId)
               .retrieve()
               .body(Product.class));
-    } catch (HttpClientErrorException.NotFound exception){
+    } catch (HttpClientErrorException.NotFound exception) {
       return Optional.empty();
     }
   }

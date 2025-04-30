@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.Locale;
 
 
-@ControllerAdvice
+@ControllerAdvice()
 @RequiredArgsConstructor
 public class BadRequestControllerAdvice {
   private final MessageSource messageSource;

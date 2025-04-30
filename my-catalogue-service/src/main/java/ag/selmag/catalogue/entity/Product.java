@@ -25,6 +25,6 @@ public class Product {
   @Column(name = "c_title")
   private String title;
 
-  @Column(name = "c_detail")
+  @Column(name = "c_details")
   private String details;
 }

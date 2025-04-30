@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Наши товары &ndash Сельмаг</title>
+</head>
+<body>
+<a th:href="@{/customer/products/favourites}">Изабранное</a>
+<h1>Наши товары</h1>
+<form th:method="GET" th:action="@{/customer/products/list}">
+    <label>Фильтр
+        <input type="text" name="filter" th:value="${filter} ">
+    </label>
+    <button type="submit">Фильтровать</button>
+</form>
+<ul>
+    <li th:each="product : ${products}">
+        <a th:text="${product.title()}" th:href="@{/customer/products/{productId}(productId=${product.id()})}"></a>
+    </li>
+</ul>
+</body>
+</html>

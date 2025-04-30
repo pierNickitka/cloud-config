@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+//import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +25,13 @@ public class ProductsRestController {
   private final MessageSource messageSource;
 
   @GetMapping
-  public Iterable<Product> findProducts(@RequestParam(name = "filter" ,required = false) String filter, Principal principal){
-    LoggerFactory.getLogger(ProductsRestController.class)
-            .info("principal {}", ((JwtAuthenticationToken)principal).getToken().getClaimAsString("email") );
+  public Iterable<Product> findProducts(@RequestParam(name = "filter" ,required = false) String filter){
+//    LoggerFactory.getLogger(ProductsRestController.class)
+//            .info("principal {}", ((JwtAuthenticationToken)principal).getToken().getClaimAsString("email") );
     return this.productService.findAllProducts("%"+filter+"%");
   }
 
-  @PostMapping()
+  @PostMapping
   public ResponseEntity<?> createProduct(@Valid @RequestBody NewProductPayload payload,
                                                BindingResult bindingResult,
                                                UriComponentsBuilder uriBuilder) throws BindException {

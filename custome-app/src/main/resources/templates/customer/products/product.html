@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${product.title}]] &ndash Сельмаг</title>
+</head>
+<body>
+<a th:href="@{/customer/products/list}">&larr; К списку товаров</a>
+<h1 th:text="${product.title}"></h1>
+<p th:text="${product.details}"></p>
+
+<form method="post" th:action="@{/customer/products/{productId}/add-to-favourites(productId=${product.id})}"
+    th:if="${!inFavorite}">
+    <button type="submit">Добавить в избраное</button>
+</form>
+
+<form method="post" th:action="@{/customer/products/{productId}/remove-from-favourites(productId=${product.id})}"
+      th:if="${inFavorite}">
+    <button type="submit">Удалить из избраного</button>
+</form>
+
+<div th:if="${errors}">
+    <h3></h3>
+    <ul>
+        <li th:each="error : ${errors}" th:text="${error}"></li>
+    </ul>
+</div>
+<h2>Отзывы</h2>
+<form method="post" th:action="@{/customer/products/{productId}/create-review(productId=${product.id})}">
+    <label><input type="radio" name="rating" value="1">1</label>
+    <label><input type="radio" name="rating" value="2">2</label>
+    <label><input type="radio" name="rating" value="3">3</label>
+    <label><input type="radio" name="rating" value="4">4</label>
+    <label><input type="radio" name="rating" value="5">5</label>
+    <br>
+    <label>Отзыв:<br>
+        <textarea name="review" th:value="${payload?.review()}"></textarea>
+    </label><br>
+    <button type="submit">Отправить отзыв</button>
+</form>
+    <div th:each="review: ${reviews}">
+        <h3>[[${review.rating}]]*</h3>
+        <p th:text="${review.review}"></p>
+    </div>
+</body>
+</html>
