@@ -38,15 +38,15 @@ public class ProductController {
   }
 
   @GetMapping
-  public Mono<String> getProductPage(@PathVariable("productId") int id,
+  public Mono<String> getProductPage(@PathVariable("productId") Integer id,
                                      Model model) {
-    model.addAttribute("inFavorite", false);
+    model.addAttribute("inFavourite", false);
     return this.productReviewsClient.findProductReviewsByProductId(id)
             .collectList()
             .doOnNext(productReviews -> model.addAttribute("reviews", productReviews))
             .then(this.favouriteProductClient
                     .findFavouriteProductByProductId(id)
-                    .doOnNext(fp -> model.addAttribute("inFavorite", true)))
+                    .doOnNext(fp -> model.addAttribute("inFavourite", true)))
             .thenReturn("customer/products/product");
   }
 
@@ -78,7 +78,7 @@ public class ProductController {
     return this.productReviewsClient.createProductReview(id, payload.rating(), payload.review())
             .thenReturn("redirect:/customer/products/%d".formatted(id))
             .onErrorResume(ClientBadRequestException.class, exception -> {
-              model.addAttribute("inFavorite", false);
+              model.addAttribute("inFavourite", false);
               model.addAttribute("payload", payload);
               model.addAttribute("errors", exception.getErrors());
               return this.favouriteProductClient.findFavouriteProductByProductId(id)

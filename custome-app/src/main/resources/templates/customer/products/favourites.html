@@ -7,11 +7,8 @@
 <body>
 <a th:href="@{/customer/products/list}">Все товары</a>
 <h1>Избранные товары</h1>
-<form th:method="GET" th:action="@{/customer/products/list}">
-    <label>Фильтр
-        <input type="text" name="filter" th:value="${filter} ">
-    </label>
-    <button type="submit">Фильтровать</button>
+<form>
+    <label>Фильтр: <input type="text" name="filter" th:value="${filter}"> <button type="submit">Поиск</button></label>
 </form>
 <ul>
     <li th:each="product : ${products}">
