@@ -4,8 +4,10 @@ import ag.selmag.manager.controller.client.BadRequestException;
 import ag.selmag.manager.controller.client.ProductsRestClient;
 import ag.selmag.manager.controller.payload.NewProductPayload;
 import ag.selmag.manager.entity.Product;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,11 +36,13 @@ public class ProductsController {
 
   @PostMapping("create")
   public String createProduct(NewProductPayload payload,
-                              Model model) {
+                              Model model,
+                              HttpServletResponse response) {
     try {
       Product product = this.productsRestClient.createProduct(payload.title(), payload.details());
       return "redirect:/catalogue/products/%d".formatted(product.id());
     } catch (BadRequestException e){
+      response.setStatus(HttpStatus.BAD_REQUEST.value());
       model.addAttribute("payload", payload);
       model.addAttribute("errors", e.getErrors());
       return "catalogue/products/new_product";

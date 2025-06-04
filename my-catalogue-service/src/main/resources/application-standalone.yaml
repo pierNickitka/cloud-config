@@ -9,11 +9,11 @@ spring:
       - public
   jpa:
     show-sql: true
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: http://localhost:8082/realms/selmag
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/selmag
 server:
   port: 8081
 logging:

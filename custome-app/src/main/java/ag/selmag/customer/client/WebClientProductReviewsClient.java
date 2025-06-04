@@ -20,7 +20,7 @@ public class WebClientProductReviewsClient implements ProductReviewsClient {
   @Override
   public Flux<ProductReview> findProductReviewsByProductId(Integer productId) {
     return this.webCLient.get()
-            .uri("/feedback-api/favourite-products/by-product-id/{productId}", productId)
+            .uri("/feedback-api/product-reviews/by-product-id/{productId}", productId)
             .retrieve()
             .bodyToFlux(ProductReview.class);
   }
@@ -34,7 +34,7 @@ public class WebClientProductReviewsClient implements ProductReviewsClient {
             .retrieve()
             .bodyToMono(ProductReview.class)
             .onErrorMap(WebClientResponseException.BadRequest.class,
-                    ex -> new ClientBadRequestException(ex,
+                    ex -> new ClientBadRequestException("Возникла ошибка при добавление отзыва о товаре",ex,
                             ((List<String>) ex.getResponseBodyAs(ProblemDetail.class).getProperties().get("errors"))));
   }
 }

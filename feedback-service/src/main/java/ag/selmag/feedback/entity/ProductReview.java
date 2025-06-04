@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document("product_review")
 public class ProductReview {
 
   @Id
@@ -20,5 +22,7 @@ public class ProductReview {
   private int rating;
 
   private String review;
+
+  private String userId;
 
 }

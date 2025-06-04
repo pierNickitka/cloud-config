@@ -22,7 +22,6 @@ import java.util.Map;
 @RequestMapping("catalogue-api/products")
 public class ProductsRestController {
   private final ProductService productService;
-  private final MessageSource messageSource;
 
   @GetMapping
   public Iterable<Product> findProducts(@RequestParam(name = "filter" ,required = false) String filter){

@@ -5,10 +5,14 @@ import ag.selmag.feedback.entity.ProductReview;
 import ag.selmag.feedback.service.ProductReviewsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.WebExchangeBindException;
@@ -23,23 +27,32 @@ public class ProductReviewsRestController {
 
   private final ProductReviewsService productReviewsService;
 
-  @GetMapping("by-product-id/{productId:\\d+}")
+//  private final ReactiveMongoTemplate mongoTemplate;
+
+/*  @GetMapping("by-product-id/{productId:\\d+}")
   public Flux<ProductReview> findProductReviewsByProductId(@PathVariable("productId") int productId) {
+    return this.mongoTemplate.find
+            (Query.query(Criteria.where("productId").is(productId)), ProductReview.class);
+  }*/
+
+  @GetMapping("by-product-id/{productId:\\d+}")
+  public Flux<ProductReview> findProductReviewsByProductId(@PathVariable int productId){
     return this.productReviewsService.findProductReviewsByProduct(productId);
   }
 
   @PostMapping
-  public Mono<ResponseEntity<ProductReview>> createProductReview(@Valid @RequestBody Mono<NewProductReviewPayload> payloadMono,
-                                                                 UriComponentsBuilder uriBuilder) {
-    return payloadMono
+  public Mono<ResponseEntity<ProductReview>> createProductReview(Mono<JwtAuthenticationToken> tokenMono,
+                 @Valid @RequestBody Mono<NewProductReviewPayload> payloadMono,
+                 UriComponentsBuilder uriBuilder) {
+    return tokenMono.flatMap(token -> payloadMono
             .flatMap(productReview -> this.productReviewsService.createProductReview
-                    (productReview.productId(), productReview.rating(), productReview.reviews()))
+                    (productReview.productId(), productReview.rating(),
+                            productReview.review(), token.getToken().getSubject())))
             .map(productReview -> ResponseEntity
                     .created(uriBuilder.replacePath("/feedback-api/product-reviews/{id}")
                             .build(productReview.getId()))
                     .body(productReview));
   }
-
 
 
 }

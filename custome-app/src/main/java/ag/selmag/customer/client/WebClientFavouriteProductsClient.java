@@ -44,7 +44,7 @@ public class WebClientFavouriteProductsClient implements FavouriteProductsClient
             .retrieve()
             .bodyToMono(FavouriteProduct.class)
             .onErrorMap(WebClientResponseException.BadRequest.class,
-                    ex -> new ClientBadRequestException(ex,
+                    ex -> new ClientBadRequestException("Возникла ошибка при добавление товара в избранные",ex,
                             ((List<String>) ex.getResponseBodyAs(ProblemDetail.class)
                                     .getProperties().get("errors"))));
   }

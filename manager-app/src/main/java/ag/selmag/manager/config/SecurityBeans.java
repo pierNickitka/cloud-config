@@ -37,7 +37,8 @@ public class SecurityBeans {
     OidcUserService oidcUserService = new OidcUserService();
     return userRequest -> {
       OidcUser oidcUser = oidcUserService.loadUser(userRequest);
-      List<GrantedAuthority> authorities = Stream.concat(oidcUser.getAuthorities().stream(), Optional.ofNullable(oidcUser.getClaimAsStringList("groups"))
+      List<GrantedAuthority> authorities = Stream.concat(oidcUser.getAuthorities().stream(),
+                      Optional.ofNullable(oidcUser.getClaimAsStringList("groups"))
                       .orElseGet(List::of)
                       .stream()
                       .filter(role -> role.startsWith("ROLE_"))

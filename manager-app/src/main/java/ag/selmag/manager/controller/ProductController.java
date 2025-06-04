@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,11 +45,13 @@ public class ProductController {
   @PostMapping("edit")
   public String editProduct(@ModelAttribute(name = "product", binding = false) Product product,
                             UpdateProductPayload payload,
-                            Model model){
+                            Model model,
+                            HttpServletResponse  response){
       try {
         this.productsRestClient.updateProduct(product.id(), payload.title(), payload.details());
         return "redirect:/catalogue/products/%d".formatted(product.id());
       } catch (BadRequestException e){
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
         model.addAttribute("payload", payload);
         model.addAttribute("errors", e.getErrors());
         return "catalogue/products/edit";
@@ -67,8 +70,8 @@ public class ProductController {
                                              HttpServletResponse response, Locale locale){
     response.setStatus(HttpStatus.NOT_FOUND.value());
     model.addAttribute("error",
-            this.messageSource.getMessage(ex.getMessage(), null,
-                    "товар не найден loh", locale));
+            this.messageSource.getMessage(ex.getMessage(), new Object[0],
+                    ex.getMessage(), locale));
     return "errors/404";
   }
 }

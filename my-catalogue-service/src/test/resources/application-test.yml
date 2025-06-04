@@ -3,3 +3,9 @@ spring:
     url: jdbc:tc:postgresql:16:///selmag?TC_DAEMON=true
     username: selmag
     password: selmag
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
