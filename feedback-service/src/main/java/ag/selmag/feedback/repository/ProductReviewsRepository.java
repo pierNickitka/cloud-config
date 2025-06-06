@@ -10,6 +10,6 @@ import java.util.UUID;
 
 public interface ProductReviewsRepository extends ReactiveCrudRepository<ProductReview, UUID> {
 
-  @Query("{'productId': ?0}")
+//  @Query("{'productId': ?0}")
   Flux<ProductReview> findAllByProductId(int productId);
 }

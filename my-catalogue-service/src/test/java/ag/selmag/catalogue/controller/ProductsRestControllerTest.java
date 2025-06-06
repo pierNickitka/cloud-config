@@ -47,13 +47,13 @@ class ProductsRestControllerTest {
             .mapToObj(i -> new Product(i, "Товар №" + i, "Описание товара №" + i))
             .toList();
     Mockito.doReturn(products)
-            .when(this.productService).findAllProducts("%" + "товар" + "%");
+            .when(this.productService).findAllProducts("товар");
     //when
     Iterable<Product> result = productsRestController.findProducts(filter);
     //then
     assertEquals(products, result);
 
-    verify(this.productService,times(1)).findAllProducts("%" + filter + "%");
+    verify(this.productService,times(1)).findAllProducts(filter);
     verifyNoMoreInteractions(this.productService);
   }
 

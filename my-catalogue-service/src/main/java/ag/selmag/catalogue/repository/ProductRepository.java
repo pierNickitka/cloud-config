@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
   //  @Query(value ="select p from Product p where p.title ilike :filter")
-  @Query(name = "Product.findAllByTitleLikeIgnoreCase")
+//  @Query(name = "Product.findAllByTitleLikeIgnoreCase")
   Iterable<Product> findAllByTitleLikeIgnoreCase(@Param("filter") String filter);
 }

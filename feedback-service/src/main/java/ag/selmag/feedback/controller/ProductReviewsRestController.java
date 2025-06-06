@@ -3,6 +3,8 @@ package ag.selmag.feedback.controller;
 import ag.selmag.feedback.controller.payload.NewProductReviewPayload;
 import ag.selmag.feedback.entity.ProductReview;
 import ag.selmag.feedback.service.ProductReviewsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -36,7 +38,10 @@ public class ProductReviewsRestController {
   }*/
 
   @GetMapping("by-product-id/{productId:\\d+}")
-  public Flux<ProductReview> findProductReviewsByProductId(@PathVariable int productId){
+  @Operation(
+          security = @SecurityRequirement(name = "keycloak")
+  )
+  public Flux<ProductReview> findProductReviewsByProductId(@PathVariable("productId") int productId){
     return this.productReviewsService.findProductReviewsByProduct(productId);
   }
 

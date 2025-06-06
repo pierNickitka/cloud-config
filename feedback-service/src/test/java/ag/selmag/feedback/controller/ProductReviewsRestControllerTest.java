@@ -37,7 +37,8 @@ class ProductReviewsRestControllerTest {
   void findProductReviewsByProductId_ReturnsProductReviews(){
     //given
     doReturn(Flux.fromIterable(List.of(new ProductReview(UUID.fromString("6a8512d8-cbaa-11ee-b986-376cc5867cf5"),
-            1, 5, "Хороший товар", "user-id1"), new ProductReview(UUID.fromString("2a8512d8-cbaa-41ee-b986-376cc5867cf5"),
+            1, 5, "Хороший товар", "user-id1"),
+            new ProductReview(UUID.fromString("2a8512d8-cbaa-41ee-b986-376cc5867cf5"),
             1, 3, "Так се товар", "user-id2"))))
             .when(this.service).findProductReviewsByProduct(1);
     //when
@@ -48,7 +49,7 @@ class ProductReviewsRestControllerTest {
             .verifyComplete();
     //then
     verify(this.service).findProductReviewsByProduct(1);
-    verifyNoInteractions(this.service);
+    verifyNoMoreInteractions(this.service);
   }
 
 
