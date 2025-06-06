@@ -1,4 +1,4 @@
-package ag.selmag.feedback.controller.config;
+package ag.selmag.feedback.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +17,11 @@ public class SecurityBeans {
             .authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec
                     .pathMatchers("/webjars/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**")
                       .permitAll()
+                    .pathMatchers("/actuator/**").hasAuthority("SCOPE_metrics")
                     .anyExchange().authenticated())
             .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
             .oauth2ResourceServer(customizer -> customizer.jwt(Customizer.withDefaults()))
+            .oauth2Client(Customizer.withDefaults())
             .build();
   }
 }
