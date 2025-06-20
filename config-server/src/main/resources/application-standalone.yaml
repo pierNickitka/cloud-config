@@ -1,0 +1,17 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: selmag-config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///D:/JavaProj/full-spring-application/config/cloud/{application}/{profile}
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          config:
+            server: DEBUG

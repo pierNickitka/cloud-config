@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.security.OAuthScope;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationContext;
 
 @SecurityScheme(
@@ -24,6 +25,7 @@ import org.springframework.context.ApplicationContext;
         )
 )
 @SpringBootApplication
+@EnableDiscoveryClient
 public class FeedbackCustomerApplication {
   public static void main(String[] args) {
     SpringApplication.run(FeedbackCustomerApplication.class, args);

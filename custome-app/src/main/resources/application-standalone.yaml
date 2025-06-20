@@ -2,17 +2,19 @@ selmag:
   services:
     catalogue:
       uri: http://localhost:8081
-
+    feedback:
+      uri: http://localhost:8084
 server:
   port: 8083
-
 spring:
+  application:
+    name: selmag-customer-app
   security:
     oauth2:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://host.docker.internal:8082/realms/selmag
             user-name-attribute: preferred_username
         registration:
           keycloak:
@@ -21,3 +23,16 @@ spring:
             scope:
               - openid
               - view_catalogue
+          discovery:
+            client-id: customer-app
+            client-secret: Dh9ookaQ4PaHOy6ukiuqdj56S7w6U8jx
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+management:
+  zipkin:
+    tracing:
+      endpoint: http://host.docker.internal:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0

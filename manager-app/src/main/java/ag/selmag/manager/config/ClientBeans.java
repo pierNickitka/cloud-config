@@ -3,6 +3,8 @@ package ag.selmag.manager.config;
 import ag.selmag.manager.controller.client.RestClientProductsRestClientImpl;
 import ag.selmag.manager.security.OAuthClientHttpRequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
@@ -19,9 +21,12 @@ public class ClientBeans {
           @Value("${selmag.services.catalogue.uri:http://localhost:8081}") String catalogueBaseUri,
           ClientRegistrationRepository clientRegistrationRepository,
           OAuth2AuthorizedClientRepository authorizedClientRepository,
-          @Value("${selmag.services.catalogue.registration-id:keycloak}") String registrationId) {
+          @Value("${selmag.services.catalogue.registration-id:keycloak}") String registrationId,
+          LoadBalancerClient loadBalancerClient)
+    {
     return new RestClientProductsRestClientImpl(RestClient.builder()
             .baseUrl(catalogueBaseUri)
+            .requestInterceptor(new LoadBalancerInterceptor(loadBalancerClient))
             .requestInterceptor(
                     new OAuthClientHttpRequestInterceptor(new DefaultOAuth2AuthorizedClientManager
                                     (clientRegistrationRepository,authorizedClientRepository), registrationId))

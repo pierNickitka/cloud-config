@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.security.OAuthScope;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @SecurityScheme(
@@ -24,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                         }
                 ))
 )
+@EnableDiscoveryClient
 public class CatalogueServiceApplication {
   public static void main(String[] args) {
     SpringApplication.run(CatalogueServiceApplication.class, args);

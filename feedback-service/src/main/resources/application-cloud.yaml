@@ -1,0 +1,71 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: selmag-feedback-service
+  boot:
+    admin:
+      client:
+        enabled: true
+        instance:
+          name: feedback-service
+          service-host-type: ip
+        url: http://localhost:8085
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/feedback
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://host.docker.internal:8082/realms/selmag
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://host.docker.internal:8082/realms/selmag
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            client-id: feedback-service-metrics-client
+            client-secret: 1FPmJmPjKj2LYca5mc7qB23MYmThuLnF
+            scope:
+              - metrics_server
+          discovery:
+            provider: keycloak
+            authorization-grant-type: client_credentials
+            client-id: feedback-service-metrics-client
+            client-secret: 1FPmJmPjKj2LYca5mc7qB23MYmThuLnF
+            scope:
+              - discovery
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: feedback-service-swagger-ui
+      use-pkce-with-authorization-code-grant: true
+
+keycloak:
+  uri: http://localhost:8082
+
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://host.docker.internal:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true

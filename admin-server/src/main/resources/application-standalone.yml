@@ -1,16 +1,17 @@
 server:
   port: 8085
+  address: 0.0.0.0
 
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/selmag
+          issuer-uri: http://host.docker.internal:8082/realms/selmag
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://host.docker.internal:8082/realms/selmag
         registration:
           keycloak:
             authorization-grant-type: client_credentials
@@ -20,8 +21,15 @@ spring:
             client-secret: yPTdI0NnWlAeB8CFrOCl7hMuLhVrt0Lq
           login:
             provider: keycloak
-            client-id: admin-service
-            client-secret: yPTdI0NnWlAeB8CFrOCl7hMuLhVrt0Lq
             scope:
               - metrics
               - openid
+            client-id: admin-service
+            client-secret: yPTdI0NnWlAeB8CFrOCl7hMuLhVrt0Lq
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus

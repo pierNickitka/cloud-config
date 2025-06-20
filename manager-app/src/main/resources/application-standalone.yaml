@@ -4,6 +4,9 @@ selmag:
       uri: http://localhost:8081
       registration-id: keycloak
 spring:
+  application:
+    name: selmag-manager-app
+
   datasource:
     url: jdbc:postgresql://localhost:5433/manager
     username: manager
@@ -19,9 +22,23 @@ spring:
         registration:
           keycloak:
             client-id: manager-app
-            client-secret: JwByKV4Y8m95GDYTNqJH6jfaj5dXpv8F
+            client-secret: W3QQD9NlFJaRkrQzyXkdTIqq1NeAndbp
             scope:
               - openid
               - view_catalogue
               - edit_catalogue
               - microprofile-jwt
+          discovery:
+            provider: keycloak
+            client-id: manager-app
+            client-secret: W3QQD9NlFJaRkrQzyXkdTIqq1NeAndbp
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+management:
+  zipkin:
+    tracing:
+      endpoint: http://host.docker.internal:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
