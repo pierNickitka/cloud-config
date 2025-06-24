@@ -7,4 +7,4 @@ spring:
     config:
       server:
         native:
-          search-locations: file://${user.home}/projects/2024/selmag-parent-sc24/config/cloud/{application}/{profile}
+          search-locations: file:///D:/JavaProj/applicationfromgithub/config/cloud/{application}/{profile}

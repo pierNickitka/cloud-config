@@ -132,10 +132,10 @@ class ProductRestControllerTest {
     void handleNoSuchElementException_ReturnsNotFound() {
         // given
         var exception = new NoSuchElementException("error_code");
-        var locale = Locale.of("ru");
+        var locale = new Locale("ru");
 
         doReturn("error details").when(this.messageSource)
-                .getMessage("error_code", new Object[0], "error_code", Locale.of("ru"));
+                .getMessage("error_code", new Object[0], "error_code", new Locale("ru"));
 
         // when
         var result = this.controller.handleNoSuchElementException(exception, locale);

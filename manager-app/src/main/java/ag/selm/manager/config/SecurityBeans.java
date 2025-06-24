@@ -60,7 +60,6 @@ public class SecurityBeans {
                                     .map(SimpleGrantedAuthority::new)
                                     .map(GrantedAuthority.class::cast))
                             .toList();
-
             return new DefaultOidcUser(authorities, oidcUser.getIdToken(), oidcUser.getUserInfo());
         };
     }

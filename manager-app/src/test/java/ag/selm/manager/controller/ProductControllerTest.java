@@ -155,10 +155,10 @@ class ProductControllerTest {
         var exception = new NoSuchElementException("error");
         var model = new ConcurrentModel();
         var response = new MockHttpServletResponse();
-        var locale = Locale.of("ru");
+        var locale = new Locale("ru");;
 
         doReturn("Ошибка").when(this.messageSource)
-                .getMessage("error", new Object[0], "error", Locale.of("ru"));
+                .getMessage("error", new Object[0], "error", new Locale("ru"));
 
         // when
         var result = this.controller.handleNoSuchElementException(exception, model, response, locale);
@@ -167,7 +167,7 @@ class ProductControllerTest {
         assertEquals("errors/404",  result);
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 
-        verify(this.messageSource).getMessage("error", new Object[0], "error", Locale.of("ru"));
+        verify(this.messageSource).getMessage("error", new Object[0], "error", new Locale("ru"));
         verifyNoMoreInteractions(this.messageSource);
         verifyNoInteractions(this.productsRestClient);
     }

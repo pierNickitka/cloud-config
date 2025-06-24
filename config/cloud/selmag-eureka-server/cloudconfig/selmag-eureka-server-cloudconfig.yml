@@ -1,6 +1,6 @@
 eureka:
   instance:
-    hostname: 172.17.0.1
+    hostname: host.docker.internal
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 1
   client:
@@ -16,13 +16,13 @@ spring:
         provider:
           keycloak:
             user-name-attribute: preferred_username
-            issuer-uri: http://172.17.0.1:8082/realms/selmag
+            issuer-uri: http://host.docker.internal:8082/realms/selmag
         registration:
           keycloak:
             client-id: eureka-server
-            client-secret: CmiOMjFHzWqXMbde2p2r3Aco6DfE83Oj
+            client-secret: d6TQdmZFuzJJVMAWHTNn2maUTUDRiH9L
             scope:
               - openid
       resourceserver:
         jwt:
-          issuer-uri: http://172.17.0.1:8082/realms/selmag
+          issuer-uri: http://host.docker.internal:8082/realms/selmag

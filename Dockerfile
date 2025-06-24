@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.2_13-jdk-jammy as build
+FROM eclipse-temurin:17.0.15_6-jdk-jammy as build
 
 ARG JAR_FILE
 WORKDIR /build
@@ -6,7 +6,7 @@ WORKDIR /build
 ADD $JAR_FILE application.jar
 RUN java -Djarmode=layertools -jar application.jar extract --destination extracted
 
-FROM eclipse-temurin:21.0.2_13-jdk-jammy
+FROM eclipse-temurin:17.0.15_6-jdk-jammy
 
 RUN addgroup spring-boot-group && adduser --ingroup spring-boot-group spring-boot
 USER spring-boot:spring-boot-group

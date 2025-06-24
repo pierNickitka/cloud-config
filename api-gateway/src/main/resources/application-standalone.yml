@@ -3,24 +3,24 @@ spring:
     gateway:
       routes:
         - id: catalogue-service-route
-          uri: http://172.17.0.1:8081
+          uri: http://host.docker.internal:8081
           predicates:
-            - Host=catalogue.api.selm.ag.172.17.0.1.nip.io
+            - Host=catalogue.api.selm.ag.host.docker.internal.nip.io
         - id: feedback-service-route
-          uri: http://172.17.0.1:8084
+          uri: http://host.docker.internal:8084
           predicates:
-            - Host=feedback.api.selm.ag.172.17.0.1.nip.io
+            - Host=feedback.api.selm.ag.host.docker.internal.nip.io
     config:
       enabled: false
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://172.17.0.1:8082/realms/selmag
+          issuer-uri: http://host.docker.internal:8082/realms/selmag
       client:
         provider:
           keycloak:
-            issuer-uri: http://172.17.0.1:8082/realms/selmag
+            issuer-uri: http://host.docker.internal:8082/realms/selmag
         registration:
           discovery:
             provider: keycloak
@@ -41,12 +41,12 @@ spring:
   boot:
     admin:
       client:
-        url: http://172.17.0.1:8085
+        url: http://host.docker.internal:8085
         instance:
           name: api-gateway
           service-host-type: ip
-          service-base-url: http://172.17.0.1:8086
-          management-base-url: http://172.17.0.1:8086
+          service-base-url: http://host.docker.internal:8086
+          management-base-url: http://host.docker.internal:8086
         enabled: true
 management:
   health:
@@ -60,7 +60,7 @@ management:
         include: '*'
   zipkin:
     tracing:
-      endpoint: http://172.17.0.1:9411/api/v2/spans
+      endpoint: http://host.docker.internal:9411/api/v2/spans
   tracing:
     sampling:
       probability: 1.0

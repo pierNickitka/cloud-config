@@ -8,7 +8,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
@@ -22,7 +22,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
@@ -36,7 +36,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
@@ -50,7 +50,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
@@ -64,7 +64,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
@@ -78,7 +78,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
@@ -92,7 +92,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
@@ -106,7 +106,7 @@ scrape_configs:
     oauth2:
       client_id: victoria-metrics
       client_secret: vTpeB59Sb2Qzh0HI4cXBlewm2ivY0dzD
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      token_url: http://host.docker.internal:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:

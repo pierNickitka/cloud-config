@@ -97,7 +97,7 @@ class ProductsRestControllerIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {"title": "  ", "details": null}""")
-                .locale(Locale.of("ru", "RU"))
+                .locale(new Locale("ru"))
                 .with(jwt().jwt(builder -> builder.claim("scope", "edit_catalogue")));
 
         // when
@@ -123,7 +123,7 @@ class ProductsRestControllerIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {"title": "  ", "details": null}""")
-                .locale(Locale.of("ru", "RU"))
+                .locale(new Locale("ru"))
                 .with(jwt().jwt(builder -> builder.claim("scope", "view_catalogue")));
 
         // when

@@ -123,7 +123,7 @@ class ProductRestControllerIT {
     void updateProduct_RequestIsInvalid_ReturnsBadRequest() throws Exception {
         // given
         var requestBuilder = MockMvcRequestBuilders.patch("/catalogue-api/products/1")
-                .locale(Locale.of("ru"))
+                .locale(new Locale("ru"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
@@ -150,7 +150,7 @@ class ProductRestControllerIT {
     void updateProduct_ProductDoesNotExist_ReturnsNotFound() throws Exception {
         // given
         var requestBuilder = MockMvcRequestBuilders.patch("/catalogue-api/products/1")
-                .locale(Locale.of("ru"))
+                .locale(new Locale("ru"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
@@ -172,7 +172,7 @@ class ProductRestControllerIT {
     void updateProduct_UserIsNotAuthorized_ReturnsForbidden() throws Exception {
         // given
         var requestBuilder = MockMvcRequestBuilders.patch("/catalogue-api/products/1")
-                .locale(Locale.of("ru"))
+                .locale(new Locale("ru"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {

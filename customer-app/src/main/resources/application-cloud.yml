@@ -21,7 +21,7 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://172.17.0.1:8082/realms/selmag
+            issuer-uri: http://host.docker.internal:8082/realms/selmag
             user-name-attribute: preferred_username
         registration:
           keycloak:
@@ -47,7 +47,7 @@ spring:
               - discovery
       resourceserver:
         jwt:
-          issuer-uri: http://172.17.0.1:8082/realms/selmag
+          issuer-uri: http://host.docker.internal:8082/realms/selmag
 management:
   health:
     livenessstate:
@@ -60,7 +60,7 @@ management:
         include: '*'
   zipkin:
     tracing:
-      endpoint: http://172.17.0.1:9411/api/v2/spans
+      endpoint: http://host.docker.internal:9411/api/v2/spans
   tracing:
     sampling:
       probability: 1.0

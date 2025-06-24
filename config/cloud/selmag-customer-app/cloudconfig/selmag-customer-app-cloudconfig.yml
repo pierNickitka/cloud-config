@@ -14,12 +14,12 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://172.17.0.1:8082/realms/selmag
+            issuer-uri: http://host.docker.internal:8082/realms/selmag
             user-name-attribute: preferred_username
         registration:
           keycloak:
             client-id: customer-app
-            client-secret: M1bhGCByxWDqVWeokJj6Z9sMGTI41lNc
+            client-secret: Dh9ookaQ4PaHOy6ukiuqdj56S7w6U8jx
             client-name: Selmag Keycloak
             authorization-grant-type: authorization_code
             scope:
@@ -28,7 +28,7 @@ spring:
           metrics:
             provider: keycloak
             client-id: customer-app
-            client-secret: M1bhGCByxWDqVWeokJj6Z9sMGTI41lNc
+            client-secret: Dh9ookaQ4PaHOy6ukiuqdj56S7w6U8jx
             authorization-grant-type: client_credentials
             scope:
               - metrics_server
@@ -41,7 +41,7 @@ spring:
               - discovery
       resourceserver:
         jwt:
-          issuer-uri: http://172.17.0.1:8082/realms/selmag
+          issuer-uri: http://host.docker.internal:8082/realms/selmag
 management:
   health:
     livenessstate:
@@ -54,7 +54,7 @@ management:
         include: '*'
   zipkin:
     tracing:
-      endpoint: http://172.17.0.1:9411/api/v2/spans
+      endpoint: http://host.docker.internal:9411/api/v2/spans
   tracing:
     sampling:
       probability: 1.0
@@ -66,4 +66,4 @@ eureka:
   client:
     registryFetchIntervalSeconds: 1
     service-url:
-      defaultZone: http://172.17.0.1:8761/eureka/
+      defaultZone: http://host.docker.internal:8761/eureka/
