@@ -35,7 +35,7 @@ spring:
           discovery:
             provider: keycloak
             client-id: customer-app
-            client-secret: M1bhGCByxWDqVWeokJj6Z9sMGTI41lNc
+            client-secret: Dh9ookaQ4PaHOy6ukiuqdj56S7w6U8jx
             authorization-grant-type: client_credentials
             scope:
               - discovery
