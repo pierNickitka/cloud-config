@@ -1,6 +1,6 @@
 eureka:
   client:
-      defaultZone: http://selmag-config-server-svc.selmag.svc.cluster.local:8761/eureka/
+      defaultZone: http://selmag-eureka-server-svc.selmag.svc.cluster.local:8761/eureka/
 spring:
   security:
     oauth2:
