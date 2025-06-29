@@ -7,7 +7,7 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://keycloak.localhost/realms/selmag
+            issuer-uri: http://keycloak-svc.selmag.svc.cluster.local:8080/realms/selmag
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak.localhost/realms/selmag
+          issuer-uri: http://keycloak-svc.selmag.svc.cluster.local:8080/realms/selmag
